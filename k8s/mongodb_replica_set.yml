@@ -1,0 +1,41 @@
+---
+apiVersion: mongodbcommunity.mongodb.com/v1
+kind: MongoDBCommunity
+metadata:
+  name: mongodb-community
+spec:
+  members: 2
+  type: ReplicaSet
+  version: "6.0.5"
+  security:
+    authentication:
+      modes: ["SCRAM"]
+  users:
+    - name: ds-mongodb
+      db: admin
+      passwordSecretRef:
+        name: mdb-user-password
+      roles:
+        - name: root
+          db: admin
+        - name: clusterAdmin
+          db: admin
+        - name: userAdminAnyDatabase
+          db: admin
+        - name: readWrite
+          db: products-pricing
+      scramCredentialsSecretName: mongodb-community
+  additionalMongodConfig:
+    storage.wiredTiger.engineConfig.journalCompressor: zlib
+
+# the user credentials will be generated from this secret
+# once the credentials are generated, this secret is no longer required
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mdb-user-password
+type: Opaque
+stringData:
+  password: 'YAihUXyxVLy9sb3rs9Rs'
