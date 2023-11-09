@@ -21,7 +21,7 @@ $ kubectl apply -f k8s/mongodb.yml [--namespace namespace-name]
 
 # Mongodb Connection
 
-We faced some issues to connect to mongodb replica set installed via kubernetes.
-To solve that, we port forwarded the service created, using OpenLens. Then we connected using the following connection string:
+Locally access:
+Port forwarded the service created (e.g. using OpenLens or kubectl commands). Then connect using the following connection string (replace the values with the actual ones):
 
 mongodb://username:password@localhost:forwadedport/admin?ssl=false&directConnection=true
