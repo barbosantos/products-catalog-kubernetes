@@ -38,4 +38,4 @@ metadata:
   name: mdb-user-password
 type: Opaque
 stringData:
-  password: 'YAihUXyxVLy9sb3rs9Rs'
+  password: 'YAihUXyxVLy9sb3rs9Rs' #fake password
