@@ -7,10 +7,43 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+
+import os
+
+# Path to the directory you want to check
+directory_path = '/usr/local/bin/chromedriver-linux64'
+
+# List the contents of the directory
+directory_contents = os.listdir(directory_path)
+
+# Print the contents
+print(f"Contents of {directory_path}:")
+for item in directory_contents:
+    print(item)
+
+
 
 # Initialize a Selenium WebDriver (you need to have a compatible web driver installed)
 # For example, using Chrome:
-driver = webdriver.Chrome()
+
+chrome_options = webdriver.ChromeOptions()
+chrome_options.add_argument("--headless=new")
+chrome_options.add_argument("--disable-gpu")
+chrome_options.add_argument('--no-sandbox')
+chrome_options.add_argument('--window-size=1420,1080')
+
+
+# Specify the path to Chromedriver
+chromedriver_path = '/usr/local/bin/chromedriver-linux64/chromedriver'
+#chromedriver_path = '/Users/malwina/downloads/chromedriver-mac-arm64/chromedriver'
+
+# Create a WebDriver instance using the specified Chromedriver path
+service = Service(executable_path=chromedriver_path)
+driver = webdriver.Chrome(service=service, options=chrome_options)
+
+
 
 # Navigate to the webpage
 driver.get(
